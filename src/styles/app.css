@@ -404,6 +404,31 @@
   text-decoration: underline;
 }
 
+.login-coming-soon {
+  background: var(--bg-alternative);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  margin-bottom: var(--space-2);
+}
+
+.login-coming-icon {
+  font-size: 2rem;
+  margin-bottom: var(--space-2);
+}
+
+.login-coming-title {
+  font-size: var(--text-base);
+  font-weight: 700;
+  color: var(--label-normal);
+  margin-bottom: var(--space-2);
+}
+
+.login-coming-desc {
+  font-size: var(--text-sm);
+  color: var(--label-alternative);
+  line-height: 1.6;
+}
+
 /* ── Back button ── */
 .back-btn {
   display: inline-flex;
