@@ -27,5 +27,5 @@ jobs:
       - uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CF_PAGES_API_TOKEN }}
-          accountId: 223a8edee7293f8d6dd38b8e2cef2774
+          accountId: 3f74c05826b054a4e3a4ccdf01adc632
           command: pages deploy dist --project-name nunulala-web --branch main
