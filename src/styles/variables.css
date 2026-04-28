@@ -1,0 +1,89 @@
+:root {
+  /* Primary — iOS app colors (Display P3 → sRGB converted) */
+  --primary-normal: #0061FF;
+  --primary-strong: #005AE9;
+  --primary-heavy: #0051D1;
+  --primary-light: rgba(0, 97, 255, 0.08);
+
+  /* Background */
+  --bg-white: #FFFFFF;
+  --bg-alternative: #F7F7F8;
+  --bg-warm: #FAFAF9;
+
+  /* Label */
+  --label-strong: #000000;
+  --label-normal: #171718;
+  --label-alternative: #858588;
+  --label-assistive: #B2B2B4;
+  --label-disable: #C8C8CA;
+
+  /* Line */
+  --line-normal: #E8E8EA;
+  --line-alternative: #F0F0F2;
+
+  /* Fill */
+  --fill-normal: #F2F2F4;
+  --fill-strong: #E8E8EA;
+
+  /* Status */
+  --status-positive: #4BBE4E;
+  --status-destructive: #EB534B;
+  --status-cautionary: #F5A623;
+
+  /* Shadow */
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.10);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.12);
+
+  /* Border radius */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-full: 9999px;
+
+  /* Spacing */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-20: 80px;
+
+  /* Typography */
+  --text-xs: 12px;
+  --text-sm: 14px;
+  --text-base: 16px;
+  --text-lg: 18px;
+  --text-xl: 20px;
+  --text-2xl: 24px;
+  --text-3xl: 30px;
+  --text-4xl: 36px;
+
+  /* Container */
+  --container-max: 1200px;
+  --container-padding: 24px;
+
+  /* Nav height */
+  --nav-height: 64px;
+  --app-header-height: 56px;
+  --app-bottom-nav: 60px;
+
+  /* Z-index */
+  --z-header: 100;
+  --z-overlay: 200;
+  --z-toast: 300;
+}
+
+@media (max-width: 768px) {
+  :root {
+    --container-padding: 16px;
+    --text-4xl: 28px;
+    --text-3xl: 24px;
+  }
+}
