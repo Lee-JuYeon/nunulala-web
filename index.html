@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="ko">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>nunulala — Seoul, Beyond the Ordinary</title>
-  <meta name="description" content="서울을 여행하는 새로운 방법. 장소 추천, 여행 일정 관리, 오디오 가이드까지 — nunulala에서 나만의 서울 이야기를 시작하세요.">
-  <meta property="og:title" content="nunulala — Seoul, Beyond the Ordinary">
-  <meta property="og:description" content="서울을 여행하는 새로운 방법. 장소 추천, 일정 관리, 가이드.">
+  <title>nunulala — 서울 여행을 바로 계획하는 앱</title>
+  <meta name="description" content="서울의 장소를 찾고, 일정에 담고, 리뷰와 오디오 가이드로 여행을 완성하세요.">
+  <meta property="og:title" content="nunulala — 서울 여행을 바로 계획하는 앱">
+  <meta property="og:description" content="장소 탐색, 여행 일정, 리뷰, AR 힌트를 한 곳에서.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://nunulala.com">
   <link rel="icon" href="/favicon.ico" type="image/x-icon">
@@ -14,127 +14,211 @@
 </head>
 <body class="landing-page">
 
-  <!-- Navigation -->
   <nav class="landing-nav">
     <a class="landing-nav-logo" href="/">nunulala</a>
     <div class="landing-nav-actions">
-      <a class="nav-link" href="#features">Features</a>
-      <a class="nav-link" href="#download">Download</a>
-      <a href="/app" class="btn btn-primary btn-sm" style="background:rgba(255,255,255,0.2);border:1.5px solid rgba(255,255,255,0.4);color:#fff;">
-        웹에서 탐색
-      </a>
+      <a class="nav-link" href="#features">기능</a>
+      <a class="nav-link" href="#download">QR 다운로드</a>
+      <a href="/app" class="nav-app-link">웹에서 탐색</a>
     </div>
   </nav>
 
-  <!-- Hero -->
-  <section class="hero">
-    <div class="hero-content container">
-      <div class="hero-eyebrow">
-        🗺️ Seoul Travel App
-      </div>
-      <h1 class="hero-title">
-        서울을 경험하는<br>
-        <span class="accent">새로운 방법</span>
-      </h1>
-      <p class="hero-desc">
-        드라마 촬영지부터 숨겨진 골목까지.<br>
-        장소 추천, 여행 일정, 리뷰 — 모든 것을 한 곳에서.
-      </p>
+  <main>
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <div class="hero-eyebrow">Seoul travel route planner</div>
+          <h1 class="hero-title">
+            서울에서 갈 곳을 찾고<br>
+            바로 일정에 담으세요.
+          </h1>
+          <p class="hero-desc">
+            관광지, 촬영지, 맛집, 카페를 탐색하고 하루 동선으로 정리합니다.
+            nunulala는 짧은 여행에서 필요한 결정만 빠르게 도와줍니다.
+          </p>
 
-      <div class="hero-cta" id="download">
-        <a href="#" class="btn-store btn-store-white">
-          <span class="btn-store-icon"></span>
-          <span class="btn-store-text">
-            <span class="btn-store-sub">Download on the</span>
-            <span class="btn-store-main">App Store</span>
-          </span>
-        </a>
-        <a href="#" class="btn-store btn-store-outline">
-          <span class="btn-store-icon">▶</span>
-          <span class="btn-store-text">
-            <span class="btn-store-sub">Get it on</span>
-            <span class="btn-store-main">Google Play</span>
-          </span>
-        </a>
-      </div>
+          <div class="hero-cta" id="download">
+            <a href="https://apps.apple.com/search?term=nunulala" class="btn-store btn-store-dark" data-store-link="ios">
+              <span class="btn-store-icon">App</span>
+              <span class="btn-store-text">
+                <span class="btn-store-sub">Search on</span>
+                <span class="btn-store-main">App Store</span>
+              </span>
+            </a>
+            <a href="https://play.google.com/store/search?q=nunulala&c=apps" class="btn-store btn-store-light" data-store-link="android">
+              <span class="btn-store-icon">Play</span>
+              <span class="btn-store-text">
+                <span class="btn-store-sub">Search on</span>
+                <span class="btn-store-main">Google Play</span>
+              </span>
+            </a>
+          </div>
 
-      <a href="/app" class="hero-web-cta">지금 웹에서 바로 탐색하기</a>
-    </div>
-  </section>
-
-  <!-- Features -->
-  <section class="section" id="features">
-    <div class="container">
-      <div class="section-label">Features</div>
-      <h2 class="section-title">여행의 모든 순간을<br>nunulala와 함께</h2>
-      <p class="section-desc">
-        단순한 지도 앱이 아닙니다. 서울이라는 도시 위에 당신만의 이야기를 씌워보세요.
-      </p>
-
-      <div class="features-grid">
-        <div class="feature-card">
-          <div class="feature-icon">🗺️</div>
-          <div class="feature-title">장소 탐색</div>
-          <div class="feature-desc">
-            드라마 촬영지, 현지인 맛집, 숨겨진 카페까지. 서울의 모든 장소를 카테고리별로 탐색하고, 별점과 리뷰로 최적의 장소를 찾아보세요.
+          <div class="hero-meta">
+            <span>장소 탐색</span>
+            <span>일정 관리</span>
+            <span>리뷰 기록</span>
+            <span>AR 힌트</span>
           </div>
         </div>
-        <div class="feature-card">
-          <div class="feature-icon">📅</div>
-          <div class="feature-title">여행 일정 관리</div>
-          <div class="feature-desc">
-            방문하고 싶은 장소를 골라 나만의 여행 일정을 만드세요. 동선 최적화부터 메모 기능까지, 완벽한 서울 여행 준비.
-          </div>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">⭐</div>
-          <div class="feature-title">리뷰 & 도움되요</div>
-          <div class="feature-desc">
-            실제 방문자들의 생생한 후기를 확인하고, 유용한 리뷰에 '도움되요'를 눌러보세요. 당신의 리뷰가 다음 여행자에게 도움이 됩니다.
+
+        <div class="hero-visual" aria-label="nunulala 앱 미리보기">
+          <div class="phone-shell">
+            <div class="phone-screen">
+              <div class="phone-status">
+                <span>9:41</span>
+                <span>SEOUL</span>
+              </div>
+              <div class="phone-map">
+                <div class="map-line line-a"></div>
+                <div class="map-line line-b"></div>
+                <div class="map-pin pin-a"></div>
+                <div class="map-pin pin-b"></div>
+                <div class="map-pin pin-c"></div>
+                <img class="marker-art" src="/assets/nunulala-marker.png" alt="">
+              </div>
+              <div class="phone-sheet">
+                <div class="sheet-handle"></div>
+                <div class="sheet-title-row">
+                  <div>
+                    <div class="phone-label">오늘의 추천 코스</div>
+                    <div class="phone-title">성수 · 한강 · 남산</div>
+                  </div>
+                  <div class="score-pill">4.8</div>
+                </div>
+                <div class="route-list">
+                  <div class="route-item">
+                    <span class="route-dot"></span>
+                    <div>
+                      <strong>서울숲</strong>
+                      <p>산책과 카페 동선 시작</p>
+                    </div>
+                  </div>
+                  <div class="route-item">
+                    <span class="route-dot"></span>
+                    <div>
+                      <strong>뚝섬 한강공원</strong>
+                      <p>일몰 시간대 추천</p>
+                    </div>
+                  </div>
+                  <div class="route-item">
+                    <span class="route-dot"></span>
+                    <div>
+                      <strong>남산서울타워</strong>
+                      <p>야경 리뷰 높은 장소</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- CTA -->
-  <section class="cta-section">
-    <div class="container">
-      <div class="cta-inner">
-        <div class="cta-title">지금 바로 시작하세요</div>
-        <p class="cta-desc">앱 다운로드 없이도 웹에서 바로 탐색할 수 있어요</p>
-        <a href="/app" class="cta-btn">웹에서 장소 탐색하기 →</a>
+    <section class="section feature-section" id="features">
+      <div class="container">
+        <div class="section-kicker">Core flow</div>
+        <div class="section-heading-row">
+          <h2 class="section-title">찾고, 담고, 움직입니다.</h2>
+          <p class="section-desc">
+            앱의 중심은 복잡한 여행 정보가 아니라 실제 이동할 장소와 순서입니다.
+          </p>
+        </div>
+
+        <div class="features-grid">
+          <article class="feature-card">
+            <div class="feature-icon">01</div>
+            <h3 class="feature-title">장소 탐색</h3>
+            <p class="feature-desc">
+              서울의 장소를 카테고리와 리뷰 기준으로 훑고, 관심 장소만 빠르게 고릅니다.
+            </p>
+          </article>
+          <article class="feature-card">
+            <div class="feature-icon">02</div>
+            <h3 class="feature-title">일정 구성</h3>
+            <p class="feature-desc">
+              선택한 장소를 하루 코스로 정리하고, 방문 순서와 메모를 함께 관리합니다.
+            </p>
+          </article>
+          <article class="feature-card">
+            <div class="feature-icon">03</div>
+            <h3 class="feature-title">리뷰와 기록</h3>
+            <p class="feature-desc">
+              실제 방문 후기를 남기고, 도움되는 리뷰를 기준으로 다음 장소를 판단합니다.
+            </p>
+          </article>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Footer -->
+    <section class="route-section">
+      <div class="container route-grid">
+        <div>
+          <div class="section-kicker">Travel board</div>
+          <h2 class="section-title">여행 전에는 계획표,<br>여행 중에는 이동판.</h2>
+        </div>
+        <div class="route-board">
+          <div class="board-column">
+            <div class="board-label">탐색</div>
+            <div class="board-card">북촌 한옥마을</div>
+            <div class="board-card">익선동 카페거리</div>
+          </div>
+          <div class="board-column">
+            <div class="board-label">일정</div>
+            <div class="board-card active">광장시장 점심</div>
+            <div class="board-card">청계천 산책</div>
+          </div>
+          <div class="board-column">
+            <div class="board-label">기록</div>
+            <div class="board-card">사진 메모</div>
+            <div class="board-card">리뷰 작성</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="download-section" aria-labelledby="download-title">
+      <div class="container download-grid">
+        <div class="download-copy">
+          <div class="section-kicker">Download</div>
+          <h2 class="section-title" id="download-title">QR을 찍으면 기기에 맞는 스토어로 이동합니다.</h2>
+          <p class="section-desc">
+            iPhone에서는 App Store의 nunulala 검색으로, Android에서는 Google Play의 nunulala 검색으로 연결됩니다.
+          </p>
+          <div class="download-actions">
+            <a class="text-link" href="/download">기기에서 바로 열기</a>
+            <a class="text-link muted" href="/app">웹으로 먼저 보기</a>
+          </div>
+        </div>
+        <div class="qr-panel">
+          <div class="qr-frame">
+            <img
+              src="https://api.qrserver.com/v1/create-qr-code/?size=220x220&margin=14&data=https%3A%2F%2Fnunulala.com%2Fdownload"
+              alt="nunulala 다운로드 QR 코드"
+              width="220"
+              height="220"
+            >
+          </div>
+          <div class="qr-caption">
+            <strong>nunulala 다운로드</strong>
+            <span>iOS / Android 자동 연결</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
   <footer class="landing-footer">
-    <div class="container">
-      <div class="footer-inner">
-        <div class="footer-brand">
-          <div class="footer-logo">nunulala</div>
-          <div class="footer-tagline">
-            서울을 여행하는 새로운 방법.<br>
-            장소, 일정, 이야기 — 모든 것을 한 곳에서.
-          </div>
-        </div>
-        <div class="footer-links">
-          <div class="footer-link-group">
-            <h4>서비스</h4>
-            <a href="/app">장소 탐색</a>
-            <a href="/app/schedule">여행 일정</a>
-            <a href="/app/login">로그인</a>
-          </div>
-          <div class="footer-link-group">
-            <h4>법적 고지</h4>
-            <a href="/app/terms">이용약관</a>
-            <a href="/app/privacy">개인정보처리방침</a>
-          </div>
-        </div>
+    <div class="container footer-inner">
+      <div>
+        <div class="footer-logo">nunulala</div>
+        <p class="footer-tagline">서울을 여행하는 새로운 방법.</p>
       </div>
-      <div class="footer-bottom">
-        © 2026 Nunulala. All rights reserved.
+      <div class="footer-links">
+        <a href="/app">장소 탐색</a>
+        <a href="/app/schedule">여행 일정</a>
+        <a href="/app/privacy">개인정보처리방침</a>
       </div>
     </div>
   </footer>

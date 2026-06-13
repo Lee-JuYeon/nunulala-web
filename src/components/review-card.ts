@@ -1,5 +1,6 @@
 import type { Review } from '../types/models';
 import { isLoggedIn, getAuthUser } from '../auth';
+import { escapeHtml } from '../ai-render';
 
 function renderStars(rating: number): string {
   return Array.from({ length: 5 }, (_, i) =>
@@ -27,28 +28,28 @@ export function renderReviewCard(
   const isOwner = isLoggedIn() && user?.uid === review.user_uid;
 
   return `
-    <div class="review-card" data-review-uid="${review.review_uid}">
+    <div class="review-card" data-review-uid="${escapeHtml(review.review_uid)}">
       <div class="review-card-header">
         <div class="review-card-user">
-          <div class="review-card-avatar">${getInitial(review.user_name)}</div>
+          <div class="review-card-avatar">${escapeHtml(getInitial(review.user_name))}</div>
           <div>
-            <div class="review-card-name">${review.user_name}</div>
+            <div class="review-card-name">${escapeHtml(review.user_name)}</div>
             <div class="review-card-date">${formatDate(review.created_at)}</div>
           </div>
         </div>
         <div class="review-card-stars">${renderStars(review.rating)}</div>
       </div>
-      ${review.review_text ? `<div class="review-card-text">${review.review_text}</div>` : ''}
+      ${review.review_text ? `<div class="review-card-text">${escapeHtml(review.review_text)}</div>` : ''}
       <div class="review-card-footer">
         <div class="review-card-useful${usefulActive ? ' active' : ''}">
-          <button class="useful-btn" data-review-uid="${review.review_uid}">
+          <button class="useful-btn" data-review-uid="${escapeHtml(review.review_uid)}">
             ${usefulActive ? '👍' : '👍'} 도움되요 ${review.useful_count}
           </button>
         </div>
         ${isOwner ? `
           <div style="display:flex;gap:8px;">
-            <button class="btn btn-sm btn-outline edit-review-btn" data-review-uid="${review.review_uid}">수정</button>
-            <button class="btn btn-sm btn-danger delete-review-btn" data-review-uid="${review.review_uid}">삭제</button>
+            <button class="btn btn-sm btn-outline edit-review-btn" data-review-uid="${escapeHtml(review.review_uid)}">수정</button>
+            <button class="btn btn-sm btn-danger delete-review-btn" data-review-uid="${escapeHtml(review.review_uid)}">삭제</button>
           </div>
         ` : ''}
       </div>

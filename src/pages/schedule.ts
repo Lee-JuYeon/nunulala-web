@@ -1,6 +1,7 @@
 import { api } from '../api';
 import { isLoggedIn } from '../auth';
 import { showToast } from '../components/toast';
+import { escapeHtml } from '../ai-render';
 import type { Schedule } from '../types/models';
 
 export async function renderSchedule(): Promise<void> {
@@ -79,8 +80,8 @@ function renderScheduleCard(schedule: Schedule): string {
         <div class="schedule-card-date-day">${day}</div>
       </div>
       <div class="schedule-card-info">
-        <div class="schedule-card-title">${schedule.title}</div>
-        ${schedule.memo ? `<div class="schedule-card-memo">${schedule.memo}</div>` : ''}
+        <div class="schedule-card-title">${escapeHtml(schedule.title)}</div>
+        ${schedule.memo ? `<div class="schedule-card-memo">${escapeHtml(schedule.memo)}</div>` : ''}
       </div>
       <div style="display:flex;gap:var(--space-2);margin-left:auto;">
         <button class="btn btn-sm btn-outline edit-schedule-btn" data-uid="${schedule.uid}">수정</button>
@@ -141,7 +142,7 @@ function showScheduleForm(schedule: Schedule | null): void {
       <form id="schedule-form">
         <div class="form-group" style="margin-bottom:var(--space-4);">
           <label class="form-label" for="sched-title">제목</label>
-          <input class="form-input" type="text" id="sched-title" value="${schedule?.title ?? ''}" placeholder="일정 이름" required maxlength="100">
+          <input class="form-input" type="text" id="sched-title" value="${escapeHtml(schedule?.title ?? '')}" placeholder="일정 이름" required maxlength="100">
         </div>
         <div class="form-group" style="margin-bottom:var(--space-4);">
           <label class="form-label" for="sched-date">날짜</label>
@@ -149,7 +150,7 @@ function showScheduleForm(schedule: Schedule | null): void {
         </div>
         <div class="form-group" style="margin-bottom:var(--space-5);">
           <label class="form-label" for="sched-memo">메모 (선택)</label>
-          <textarea class="form-input form-textarea" id="sched-memo" placeholder="메모를 입력하세요">${schedule?.memo ?? ''}</textarea>
+          <textarea class="form-input form-textarea" id="sched-memo" placeholder="메모를 입력하세요">${escapeHtml(schedule?.memo ?? '')}</textarea>
         </div>
         <div style="display:flex;gap:var(--space-3);">
           <button type="submit" class="btn btn-primary">${schedule ? '저장' : '추가'}</button>
@@ -207,8 +208,8 @@ async function showScheduleDetail(uid: string): Promise<void> {
     <button class="back-btn" id="back-to-schedules">← 일정 목록</button>
     <div class="place-detail-header" style="margin-bottom:var(--space-4);">
       <div class="place-detail-type">📅 ${dateStr}</div>
-      <div class="place-detail-title">${schedule.title}</div>
-      ${schedule.memo ? `<div style="font-size:var(--text-sm);color:var(--label-alternative);">${schedule.memo}</div>` : ''}
+      <div class="place-detail-title">${escapeHtml(schedule.title)}</div>
+      ${schedule.memo ? `<div style="font-size:var(--text-sm);color:var(--label-alternative);">${escapeHtml(schedule.memo)}</div>` : ''}
     </div>
     <div class="reviews-section">
       <div class="reviews-header">
@@ -221,8 +222,8 @@ async function showScheduleDetail(uid: string): Promise<void> {
             <div class="plan-item">
               <div class="plan-item-number">${i + 1}</div>
               <div class="plan-item-info">
-                <div class="plan-item-place">${plan.place?.title ?? '장소 정보 없음'}</div>
-                ${plan.memo ? `<div class="plan-item-memo">${plan.memo}</div>` : ''}
+                <div class="plan-item-place">${escapeHtml(plan.place?.title ?? '장소 정보 없음')}</div>
+                ${plan.memo ? `<div class="plan-item-memo">${escapeHtml(plan.memo)}</div>` : ''}
               </div>
             </div>
           `).join('')

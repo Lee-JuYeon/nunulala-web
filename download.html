@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>nunulala 다운로드</title>
+  <meta name="description" content="사용 중인 기기에 맞는 스토어에서 nunulala를 검색합니다.">
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      margin: 0;
+      display: grid;
+      place-items: center;
+      padding: 24px;
+      color: #000;
+      background: #f7f7f8;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans KR", sans-serif;
+    }
+
+    .download-card {
+      width: min(100%, 420px);
+      padding: 28px;
+      border: 1px solid #e8e8ea;
+      border-radius: 24px;
+      background: #fff;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 28px;
+      line-height: 1.2;
+    }
+
+    p {
+      margin: 12px 0 24px;
+      color: #858588;
+      line-height: 1.6;
+    }
+
+    .actions {
+      display: grid;
+      gap: 10px;
+    }
+
+    a {
+      min-height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 999px;
+      color: #fff;
+      background: #000;
+      text-decoration: none;
+      font-weight: 800;
+    }
+
+    a.secondary {
+      color: #000;
+      background: #f2f2f4;
+    }
+  </style>
+  <script>
+    const IOS_URL = 'https://apps.apple.com/search?term=nunulala';
+    const ANDROID_URL = 'https://play.google.com/store/search?q=nunulala&c=apps';
+
+    function getTargetUrl() {
+      const ua = navigator.userAgent || navigator.vendor || '';
+      if (/android/i.test(ua)) return ANDROID_URL;
+      if (/iphone|ipad|ipod/i.test(ua)) return IOS_URL;
+      return IOS_URL;
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      const targetUrl = getTargetUrl();
+      document.querySelector('[data-primary-link]').href = targetUrl;
+      window.setTimeout(() => {
+        window.location.href = targetUrl;
+      }, 450);
+    });
+  </script>
+</head>
+<body>
+  <main class="download-card">
+    <h1>nunulala로 이동합니다</h1>
+    <p>iPhone은 App Store, Android는 Google Play에서 nunulala 검색으로 연결됩니다.</p>
+    <div class="actions">
+      <a href="https://apps.apple.com/search?term=nunulala" data-primary-link>스토어 열기</a>
+      <a class="secondary" href="/">웹사이트로 돌아가기</a>
+    </div>
+  </main>
+</body>
+</html>

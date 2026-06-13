@@ -13,6 +13,7 @@ import type {
   AuthState,
   PlaceFilters,
 } from './types/models';
+import type { AIChatResponse, ChatSession } from './types/ai';
 import { getAccessToken, clearAuth, refreshTokens } from './auth';
 
 const API_BASE = '/api';
@@ -29,7 +30,12 @@ class ApiClient {
     };
     if (token) headers['Authorization'] = `Bearer ${token}`;
 
-    const res = await fetch(`${API_BASE}${path}`, { ...options, headers });
+    // SEC-14: HttpOnly refresh 쿠키(nunulala_rt)를 /api/auth/* 요청에 함께 전송.
+    const res = await fetch(`${API_BASE}${path}`, {
+      ...options,
+      headers,
+      credentials: 'include',
+    });
 
     if (res.status === 401) {
       const refreshed = await refreshTokens();
@@ -70,8 +76,9 @@ class ApiClient {
     return this.post('/auth/token', { provider, token });
   }
 
-  authRefresh(refreshToken: string): Promise<ApiResult<AuthState>> {
-    return this.post('/auth/refresh', { refresh_token: refreshToken });
+  // SEC-14: 서버가 HttpOnly 쿠키를 지우고 server-side refresh 세션을 폐기한다.
+  authLogout(): Promise<ApiResult<{ message: string }>> {
+    return this.post('/auth/logout');
   }
 
   // ── Places ──
@@ -204,6 +211,14 @@ class ApiClient {
 
   getUserUsefuls(userUid: string, page = 1): Promise<ApiListResult<Review>> {
     return this.get(`/users/${userUid}/usefuls?page=${page}&limit=20`);
+  }
+
+  // ── AI Chat ──
+  // ⚠️ 첫 턴은 session 필드 생략(빈/부분 객체 전송 시 HTTP 500). 서버 반환 session 을 그대로 재전송.
+  aiChat(message: string, session?: ChatSession): Promise<AIChatResponse> {
+    const body: { message: string; session?: ChatSession } = { message };
+    if (session) body.session = session;
+    return this.post('/ai/chat', body);
   }
 }
 

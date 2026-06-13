@@ -4,6 +4,7 @@ import { navigate } from '../router';
 import { renderPlaceCard, attachPlaceCardEvents } from '../components/place-card';
 import { renderReviewCard, attachReviewCardEvents } from '../components/review-card';
 import { showToast } from '../components/toast';
+import { escapeHtml } from '../ai-render';
 
 export async function renderProfile(): Promise<void> {
   const content = document.getElementById('app-content');
@@ -25,11 +26,11 @@ export async function renderProfile(): Promise<void> {
 
   content.innerHTML = `
     <div class="profile-header">
-      <div class="profile-avatar">${user.nationality?.charAt(0).toUpperCase() ?? '😊'}</div>
+      <div class="profile-avatar">${escapeHtml(user.nationality?.charAt(0).toUpperCase() ?? '😊')}</div>
       <div>
         <div class="profile-info-name">여행자</div>
         <div class="profile-info-meta">
-          ${user.nationality ? `🌏 ${user.nationality}` : ''}
+          ${user.nationality ? `🌏 ${escapeHtml(user.nationality)}` : ''}
           ${user.age ? ` · ${user.age}세` : ''}
         </div>
       </div>

@@ -1,33 +1,20 @@
 import type { AuthState, User } from './types/models';
 
-const STORAGE_KEY = 'nunulala_auth';
+// SEC-14: 토큰을 localStorage 에 저장하지 않는다. access token 은 메모리에만,
+// refresh token 은 API 가 발급한 HttpOnly 쿠키(nunulala_rt)에만 존재한다(JS 접근 불가).
+let _state: AuthState | null = null;
 
-let _state: AuthState | null = loadFromStorage();
-
-function loadFromStorage(): AuthState | null {
+/** 구버전 클라이언트가 남긴 localStorage 토큰 블롭을 방어적으로 제거. 부팅 시 1회 호출. */
+export function initAuth(): void {
   try {
-    const raw = localStorage.getItem(STORAGE_KEY);
-    if (!raw) return null;
-    return JSON.parse(raw) as AuthState;
+    localStorage.removeItem('nunulala_auth');
   } catch {
-    return null;
-  }
-}
-
-function saveToStorage(state: AuthState | null): void {
-  if (state) {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
-  } else {
-    localStorage.removeItem(STORAGE_KEY);
+    /* noop */
   }
 }
 
 export function getAccessToken(): string | null {
   return _state?.access_token ?? null;
-}
-
-export function getRefreshToken(): string | null {
-  return _state?.refresh_token ?? null;
 }
 
 export function getAuthUser(): User | null {
@@ -40,29 +27,47 @@ export function isLoggedIn(): boolean {
 
 export function setAuth(state: AuthState): void {
   _state = state;
-  saveToStorage(state);
   window.dispatchEvent(new CustomEvent('authchange', { detail: state }));
 }
 
 export function clearAuth(): void {
   _state = null;
-  saveToStorage(null);
   window.dispatchEvent(new CustomEvent('authchange', { detail: null }));
 }
 
-export async function refreshTokens(): Promise<boolean> {
-  const refreshToken = getRefreshToken();
-  if (!refreshToken) return false;
+// [재감사] 동시 401이 각각 refresh를 호출하면 회전 refresh 토큰이 중복 사용되어
+// 서버의 reuse-detection이 정상 세션을 폐기(self-DoS)한다. in-flight Promise 싱글톤으로
+// 동시 호출을 하나로 합치고, settle 시 초기화한다.
+let _refreshInFlight: Promise<boolean> | null = null;
 
+export function refreshTokens(): Promise<boolean> {
+  if (_refreshInFlight) return _refreshInFlight;
+  _refreshInFlight = doRefresh().finally(() => {
+    _refreshInFlight = null;
+  });
+  return _refreshInFlight;
+}
+
+async function doRefresh(): Promise<boolean> {
   try {
+    // refresh token 은 HttpOnly 쿠키로 전송된다(credentials:'include'). 본문은 비움.
     const res = await fetch('/api/auth/refresh', {
       method: 'POST',
+      credentials: 'include',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ refresh_token: refreshToken }),
+      body: '{}',
     });
-    const data = (await res.json()) as { success: boolean; data?: AuthState };
+    const data = (await res.json()) as {
+      success: boolean;
+      data?: { user: User; accessToken: string };
+    };
     if (data.success && data.data) {
-      setAuth(data.data);
+      // refresh_token 은 쿠키에만 존재 → AuthState 형태 유지를 위해 빈 문자열로 보관.
+      setAuth({
+        user: data.data.user,
+        access_token: data.data.accessToken,
+        refresh_token: '',
+      });
       return true;
     }
     return false;

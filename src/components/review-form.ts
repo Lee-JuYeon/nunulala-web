@@ -1,4 +1,5 @@
 import type { Review } from '../types/models';
+import { escapeHtml } from '../ai-render';
 
 interface ReviewFormData {
   rating: number;
@@ -32,7 +33,7 @@ export function renderReviewForm(existing?: Review): string {
           name="review_text"
           placeholder="방문 경험을 알려주세요"
           maxlength="1000"
-        >${text}</textarea>
+        >${escapeHtml(text)}</textarea>
       </div>
       <div class="form-group" style="margin-bottom:var(--space-5);">
         <label class="form-label" for="visit-date">방문 날짜 (선택)</label>
@@ -41,7 +42,7 @@ export function renderReviewForm(existing?: Review): string {
           type="date"
           id="visit-date"
           name="visit_date"
-          value="${date}"
+          value="${escapeHtml(date)}"
         >
       </div>
       <div style="display:flex;gap:var(--space-3);">

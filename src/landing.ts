@@ -3,6 +3,11 @@ import './styles/variables.css';
 import './styles/layout.css';
 import './styles/landing.css';
 
+const STORE_URLS = {
+  ios: 'https://apps.apple.com/search?term=nunulala',
+  android: 'https://play.google.com/store/search?q=nunulala&c=apps',
+} as const;
+
 function initNavScroll(): void {
   const nav = document.querySelector('.landing-nav');
   if (!nav) return;
@@ -27,7 +32,17 @@ function initSmoothLinks(): void {
   });
 }
 
+function initStoreLinks(): void {
+  document.querySelectorAll<HTMLAnchorElement>('[data-store-link="ios"]').forEach(link => {
+    link.href = STORE_URLS.ios;
+  });
+  document.querySelectorAll<HTMLAnchorElement>('[data-store-link="android"]').forEach(link => {
+    link.href = STORE_URLS.android;
+  });
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   initNavScroll();
   initSmoothLinks();
+  initStoreLinks();
 });

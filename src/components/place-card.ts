@@ -1,4 +1,6 @@
 import type { PlaceListItem } from '../types/models';
+import { escapeHtml } from '../ai-render';
+import { safeImageUrl } from '../safe-url';
 
 function getPlaceIcon(type: string): string {
   const map: Record<string, string> = {
@@ -27,17 +29,17 @@ export function renderPlaceCard(place: PlaceListItem): string {
   const address = place.address?.address_title ?? place.address?.full_address ?? '';
 
   return `
-    <div class="place-card" data-uid="${place.uid}" role="button" tabindex="0">
+    <div class="place-card" data-uid="${escapeHtml(place.uid)}" role="button" tabindex="0">
       ${place.thumbnail_image
-        ? `<img class="place-card-image" src="${place.thumbnail_image.image_url}" alt="${place.title}" loading="lazy">`
+        ? `<img class="place-card-image" src="${escapeHtml(safeImageUrl(place.thumbnail_image.image_url))}" alt="${escapeHtml(place.title)}" loading="lazy">`
         : `<div class="place-card-image-placeholder">${icon}</div>`
       }
       <div class="place-card-body">
-        <div class="place-card-type">${place.type_display_text}${place.subtype_display_text ? ` · ${place.subtype_display_text}` : ''}</div>
-        <div class="place-card-title">${place.title}</div>
+        <div class="place-card-type">${escapeHtml(place.type_display_text)}${place.subtype_display_text ? ` · ${escapeHtml(place.subtype_display_text)}` : ''}</div>
+        <div class="place-card-title">${escapeHtml(place.title)}</div>
         <div class="place-card-meta">
           ${rating ? `<span class="place-card-rating">${rating}</span>` : ''}
-          ${address ? `<span>📍 ${address}</span>` : ''}
+          ${address ? `<span>📍 ${escapeHtml(address)}</span>` : ''}
         </div>
       </div>
     </div>

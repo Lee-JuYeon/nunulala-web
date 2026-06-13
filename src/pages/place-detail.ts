@@ -7,6 +7,8 @@ import {
 } from '../components/review-card';
 import { renderReviewForm, attachReviewFormEvents } from '../components/review-form';
 import { showToast } from '../components/toast';
+import { escapeHtml } from '../ai-render';
+import { safeImageUrl } from '../safe-url';
 import type { Review, PlaceDetail } from '../types/models';
 
 let usefulSet = new Set<string>();
@@ -80,16 +82,16 @@ function renderDetailPage(
     <button class="back-btn" id="back-btn">← 목록으로</button>
 
     ${place.thumbnail_image
-      ? `<img class="place-detail-hero" src="${place.thumbnail_image.image_url}" alt="${place.title}">`
+      ? `<img class="place-detail-hero" src="${escapeHtml(safeImageUrl(place.thumbnail_image.image_url))}" alt="${escapeHtml(place.title)}">`
       : `<div class="place-detail-hero-placeholder">${icon}</div>`
     }
 
     <div class="place-detail-header">
       <div class="place-detail-type">
-        ${place.type_display_text}${place.subtype_display_text ? ` · ${place.subtype_display_text}` : ''}
+        ${escapeHtml(place.type_display_text)}${place.subtype_display_text ? ` · ${escapeHtml(place.subtype_display_text)}` : ''}
       </div>
-      <div class="place-detail-title">${place.title}</div>
-      ${place.subtitle ? `<div style="font-size:var(--text-sm);color:var(--label-alternative);margin-bottom:var(--space-3);">${place.subtitle}</div>` : ''}
+      <div class="place-detail-title">${escapeHtml(place.title)}</div>
+      ${place.subtitle ? `<div style="font-size:var(--text-sm);color:var(--label-alternative);margin-bottom:var(--space-3);">${escapeHtml(place.subtitle)}</div>` : ''}
 
       <div class="place-detail-stats">
         ${avgStar ? `<span class="place-detail-stat">⭐ ${avgStar.toFixed(1)} 평균</span>` : ''}
@@ -109,15 +111,15 @@ function renderDetailPage(
       <div class="place-detail-info">
         <div class="place-detail-info-row">
           <span class="place-detail-info-icon">📍</span>
-          <span class="place-detail-info-value">${addr.full_address ?? addr.address_title ?? ''}</span>
+          <span class="place-detail-info-value">${escapeHtml(addr.full_address ?? addr.address_title ?? '')}</span>
         </div>
         ${place.working_times.length > 0 ? place.working_times.map(wt => `
           <div class="place-detail-info-row">
             <span class="place-detail-info-icon">🕐</span>
-            <span class="place-detail-info-label">${wt.day_title}</span>
+            <span class="place-detail-info-label">${escapeHtml(wt.day_title)}</span>
             <span class="place-detail-info-value">
-              ${wt.open && wt.close ? `${wt.open} – ${wt.close}` : '정보 없음'}
-              ${wt.last_order ? ` (라스트오더 ${wt.last_order})` : ''}
+              ${wt.open && wt.close ? `${escapeHtml(wt.open)} – ${escapeHtml(wt.close)}` : '정보 없음'}
+              ${wt.last_order ? ` (라스트오더 ${escapeHtml(wt.last_order)})` : ''}
             </span>
           </div>
         `).join('') : ''}
